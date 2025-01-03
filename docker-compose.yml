@@ -6,8 +6,12 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: backend
+    entrypoint: ["./wait-for-it.sh", "db:5432", "--", "python", "manage.py", "runserver", "0.0.0.0:8000"]
     ports:
-      - "80:8000"  # Mappt den Port 8000 des Django-Servers auf Port 80 des Hosts
+      - "80:8000"
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
     networks:
       - app-network
     depends_on:
@@ -17,7 +21,7 @@ services:
     image: postgres:15
     container_name: db
     environment:
-      POSTGRES_USER: user
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
       POSTGRES_DB: database
     volumes:

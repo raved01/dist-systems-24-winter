@@ -1,7 +1,7 @@
 from rest_framework import serializers
-from .models import ModelName
+from .models import ShoppingItem
 
-class ModelNameSerializer(serializers.ModelSerializer):
+class ShoppingItemSerializer(serializers.ModelSerializer):
     class Meta:
-        model = ModelName
-        fields = '__all__'  # Alle Felder des Modells werden serialisiert
+        model = ShoppingItem
+        fields = ['id', 'name', 'description', 'price', 'quantity']
