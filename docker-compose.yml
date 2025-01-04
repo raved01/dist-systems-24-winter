@@ -6,16 +6,21 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: backend
-    entrypoint: ["./wait-for-it.sh", "db:5432", "--", "python", "manage.py", "runserver", "0.0.0.0:8000"]
+    command: ["sh", "/app/entrypoint.sh"]
     ports:
-      - "80:8000"
+      - "80:80"
     environment:
-      DB_HOST: db
-      DB_PORT: 5432
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_NAME=database
+      - DB_USER=postgres
+      - DB_PASSWORD=password
+      - DJANGO_SETTINGS_MODULE=dysSysLab.settings
     networks:
       - app-network
     depends_on:
-      - db
+      db:
+        condition: service_healthy
 
   db:
     image: postgres:15
@@ -28,6 +33,14 @@ services:
       - postgres-data:/var/lib/postgresql/data
     networks:
       - app-network
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres}" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
 
   flask-frontend:
     image: maeddes/frontendflask:hse24  # Offizielles Docker-Image für das Frontend
