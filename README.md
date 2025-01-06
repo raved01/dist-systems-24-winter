@@ -89,7 +89,21 @@ curl -X PUT http://localhost:8000/shopping/Apple \
 # Delete item
 curl -X DELETE http://localhost:8000/shopping/Apple
 ```
-### Testing
+### API Documentation
+The API is documented using Swagger/OpenAPI. After running the application, you can access:
+
+- Swagger UI: `http://localhost:8000/swagger/`
+- ReDoc UI: `http://localhost:8000/redoc/`
+- Raw OpenAPI Schema: `http://localhost:8000/swagger.json`
+
+#### Testing with Swagger UI
+1. Navigate to `http://localhost:8000/swagger/`
+2. The UI provides:
+   - Detailed API documentation
+   - Request/response schemas
+   - Interactive API testing interface
+   - Model definitions
+#### Testing
 1. API Tests:
 - Use curl commands as shown in Usage section
 - Test all CRUD operations
