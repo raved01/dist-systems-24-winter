@@ -5,6 +5,7 @@ from .models import ShoppingItem
 from .serializers import ShoppingItemSerializer
 
 class ShoppingItemList(APIView):
+    http_method_names = ['get', 'post']
     def get(self, request):
         items = ShoppingItem.objects.all()
         serializer = ShoppingItemSerializer(items, many=True)
