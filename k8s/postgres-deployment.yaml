@@ -24,6 +24,14 @@ spec:
           value: postgres
         - name: POSTGRES_PASSWORD
           value: password
+        readinessProbe:
+          exec:
+            command:
+            - pg_isready
+            - -U
+            - postgres
+          initialDelaySeconds: 5
+          periodSeconds: 10
         volumeMounts:
         - name: postgres-storage
           mountPath: /var/lib/postgresql/data
@@ -31,4 +39,3 @@ spec:
       - name: postgres-storage
         persistentVolumeClaim:
           claimName: postgres-pvc
----

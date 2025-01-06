@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: django-backend
 spec:
-  replicas: 2
+  replicas: 4
   selector:
     matchLabels:
       app: django-backend
@@ -12,6 +12,11 @@ spec:
       labels:
         app: django-backend
     spec:
+      initContainers:
+      - name: check-db-ready
+        image: postgres:15
+        command: ['sh', '-c',
+          'until pg_isready -h postgres-service -U postgres; do echo waiting for database; sleep 2; done;']
       containers:
       - name: django
         image: django-backend:latest
@@ -29,4 +34,3 @@ spec:
           value: postgres
         - name: DB_PASSWORD
           value: password
----
