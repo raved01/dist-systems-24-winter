@@ -3,6 +3,7 @@
 
 ### Project Overview
 A REST API for a Shopping List application, implemented with Django and deployed in Kubernetes. The application enables Creating, Reading, Updating, and Deleting of shopping items.
+The application is adhering to core principles of distributed systems and cloud-native development applying the 12-factor methodology.
 
 ### System Architecture
 - **Backend**: Django REST Framework
@@ -14,6 +15,8 @@ A REST API for a Shopping List application, implemented with Django and deployed
  - PostgreSQL Database
  - Persistent Volume for data storage
 
+### Docker Image:
+The public Docker image is available on DockerHub: `https://hub.docker.com/repository/docker/raved02/shopping-list-api/general`
 ### API Endpoints
 - `GET /shopping`: List all shopping items
 - `POST /shopping`: Create new item
@@ -134,6 +137,7 @@ SELECT * FROM app1_shoppingitem;
  Django>=4.0,<5.0
  djangorestframework
  psycopg2-binary
+ drf-yasg
 ```
 ### III. Config
 
@@ -192,6 +196,7 @@ SELECT * FROM app1_shoppingitem;
 ```
 #Get pods:
 kubectl get pods
+
 #Get logs:
 kubectl logs <pod-name>
 ```

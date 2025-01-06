@@ -19,8 +19,8 @@ spec:
           'until pg_isready -h postgres-service -U postgres; do echo waiting for database; sleep 2; done;']
       containers:
       - name: django
-        image: django-backend:latest
-        imagePullPolicy: Never
+        image: raved02/shopping-list-api:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 80
         env:
