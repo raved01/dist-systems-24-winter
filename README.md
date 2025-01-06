@@ -56,6 +56,13 @@ kubectl apply -f postgres-service.yaml
 kubectl apply -f deployment.yaml
 kubectl apply -f service.yaml
 ```
+#### 5. CORS Configuration
+The application is configured to allow cross-origin requests (CORS) using `django-cors-headers`:
+```
+#Installation
+pip install django-cors-headers
+```
+
 ### Usage
 1. Enable port forwarding:
 ```
